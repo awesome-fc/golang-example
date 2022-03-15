@@ -1,6 +1,6 @@
 
-# 阿里云函数计算 Golang runtime 使用initializer初始化mysql连接池示例
-本示例为您展示了如果使用 Golang runtime 的initializer回调函数来初始化mysql连接池。
+# 使用 initializer 回调函数初始化 mysql 连接池示例
+本示例为您展示了如何使用 Golang runtime 的 initializer 回调函数来初始化 mysql 连接池。
 在本示例中，mysql数据库配置在函数的环境变量配置中（参考s.yaml)。initializer回调函数从环境变量中获取数据库配置，创建mysql连接池并测试连通性。
 
 
@@ -16,9 +16,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`id`, `name`, `age`) VALUES
-(1, '张三', 25),
-(2, '李四', 22),
-(3, '田七', 25);
+(1, '张三', 18),
+(2, '李四', 28);
 ```
 
 - 已经安装 golang 运行时（推荐使用go1.8及以上版本）。（https://golang.google.cn/）
@@ -26,11 +25,11 @@ INSERT INTO `users` (`id`, `name`, `age`) VALUES
 
 
 ## 快速开始
-### 使用 Serverless Devs 工具
+### 方式一、使用 Serverless Devs 工具编译部署
 
 #### 1. 修改 s.yaml 配置
 - 修改 access 配置
-- 修改 environmentVariables 配置，填入 DB_USER_NAME、DB_PASSWORD、DB_ENDPOINT、DB_PORT和DB_NAME
+- 修改 environmentVariables 配置，填入 DB_USER_NAME、DB_PASSWORD、DB_ENDPOINT、DB_PORT 和 DB_NAME
 
 #### 2. 部署代码
 ```shell
@@ -45,7 +44,7 @@ s invoke
 
 ![img.png](assets/img.png)
 
-### 使用控制台创建并测试
+### 方式二、使用控制台创建
 
 #### 1. 编译部署代码包
 ```shell
@@ -70,9 +69,9 @@ cd code && zip go-initializer-mysql.zip main
 
 在生产环境，可以使用以下两种方式访问：
 
-1. VPC 内网访问（**推荐**） <br>
+1. VPC方式（**推荐**） <br>
 参考文档：https://help.aliyun.com/document_detail/84514.html
-2. 代理<br>
+2. 代理方式<br>
 参考文档：https://help.aliyun.com/document_detail/91243.html
 
 ## TODO
